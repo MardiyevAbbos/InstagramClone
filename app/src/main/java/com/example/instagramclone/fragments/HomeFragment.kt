@@ -15,7 +15,7 @@ import java.lang.RuntimeException
 
 class HomeFragment : BaseFragment() {
     private var listener: HomeListener? = null
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var rv_home: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,8 +49,8 @@ class HomeFragment : BaseFragment() {
 
 
     private fun initViews(view: View){
-        recyclerView = view.findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = GridLayoutManager(activity, 1)
+        rv_home = view.findViewById(R.id.rv_home)
+        rv_home.layoutManager = GridLayoutManager(activity, 1)
 
         val iv_camera = view.findViewById<ImageView>(R.id.iv_camera)
         iv_camera.setOnClickListener { listener!!.scrollToUpload() }
@@ -60,7 +60,7 @@ class HomeFragment : BaseFragment() {
 
     private fun refreshAdapter(items: ArrayList<Post>){
         val adapter = HomeAdapter(this, items)
-        recyclerView.adapter = adapter
+        rv_home.adapter = adapter
     }
 
     private fun loadPosts(): ArrayList<Post>{
