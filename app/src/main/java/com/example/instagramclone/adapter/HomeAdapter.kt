@@ -5,10 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.instagramclone.R
 import com.example.instagramclone.fragments.HomeFragment
+import com.example.instagramclone.managers.AuthManager
 import com.example.instagramclone.model.Post
 import com.google.android.material.imageview.ShapeableImageView
 
@@ -51,7 +53,39 @@ class HomeAdapter(var fragment: HomeFragment, var items: ArrayList<Post>) : Base
         }
 
         fun bind(post: Post){
-            Glide.with(fragment).load(post.image).into(iv_post)
+            Glide.with(fragment).load(post.userImg).placeholder(R.drawable.ic_person).error(R.drawable.ic_person).into(iv_profile)
+            Glide.with(fragment).load(post.postImg).into(iv_post)
+            tv_fullname.text = post.fullname
+            tv_time.text = post.currentDate
+            tv_caption.text = post.caption
+
+            iv_like.setOnClickListener {
+                if (post.isLiked){
+                    post.isLiked = false
+                    iv_like.setImageResource(R.mipmap.outline_favorite_border_black_24)
+                }else{
+                    post.isLiked = true
+                    iv_like.setImageResource(R.drawable.icon_red_favorite)
+                }
+                fragment.likeOrUnlikePost(post)
+            }
+
+            if (post.isLiked){
+                iv_like.setImageResource(R.drawable.icon_red_favorite)
+            }else{
+                iv_like.setImageResource(R.mipmap.outline_favorite_border_black_24)
+            }
+
+            val uid = AuthManager.currentUser()!!.uid
+            if (uid == post.uid){
+                iv_more.visibility = View.VISIBLE
+            }else{
+                iv_more.visibility = View.GONE
+            }
+            iv_more.setOnClickListener {
+                fragment.showDeleteDialog(post)
+            }
+
         }
 
     }

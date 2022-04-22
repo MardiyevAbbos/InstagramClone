@@ -20,4 +20,16 @@
     <string name="str_following">Following</string>
     <string name="str_followers">Followers</string>
     <string name="str_posts">Posts</string>
+
+    <string name="str_signin_success">Signed in successfully</string>
+    <string name="str_signin_failed">Sign in failed</string>
+    <string name="str_signup_success">Signed up successfully</string>
+    <string name="str_signup_failed">Sign up failed</string>
+    <string name="str_cancel">Cancel</string>
+    <string name="str_confirm">Confirm</string>
+    <string name="str_delete_post">Do you want to delete this post?</string>
+    <string name="str_log_out_app">Do you want to log Out this Application?</string>
+    <string name="str_followed_note">$ started following you</string>
+    <string name="str_liked_node">$ liked your post</string>
+
 </resources>

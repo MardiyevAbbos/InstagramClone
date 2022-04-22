@@ -6,6 +6,11 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import com.example.instagramclone.R
+import com.example.instagramclone.managers.AuthManager
+import com.example.instagramclone.managers.PrefsManager
+import com.example.instagramclone.utils.Logger
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 
 
 /**
@@ -27,23 +32,35 @@ class SplashActivity : BaseActivity() {
 
     private fun initViews() {
         countDownTimer()
+        loadFCMToken()
     }
 
     private fun countDownTimer() {
         object : CountDownTimer(2000,1000){
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
-                callSignInActivity()
+                if(AuthManager.isSignedIn()){
+                    callMainActivity(this@SplashActivity)
+                }else{
+                    callSignInActivity(this@SplashActivity)
+                }
             }
         }.start()
     }
 
-    private fun callSignInActivity(){
-        val intent = Intent(this, SignInActivity::class.java)
-        startActivity(intent)
-        finish()
+    private fun loadFCMToken(){
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful){
+                Logger.d(TAG, "Fetching FCM registration token failed")
+                return@OnCompleteListener
+            }
+            // Get new FCM registration token
+            // Save it in locally to use later
+            val token  = task.result
+            Logger.d(TAG+"Token", token.toString())
+            PrefsManager(this).storeDeviceToken(token.toString())
+        })
     }
-
 
     private fun hideSystemUI() {
         window.decorView.systemUiVisibility = (

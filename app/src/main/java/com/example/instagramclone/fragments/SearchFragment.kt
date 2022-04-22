@@ -10,8 +10,17 @@ import android.widget.EditText
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagramclone.R
+import com.example.instagramclone.activity.MainActivity
 import com.example.instagramclone.adapter.SearchAdapter
+import com.example.instagramclone.managers.AuthManager
+import com.example.instagramclone.managers.DatabaseManager
+import com.example.instagramclone.managers.handler.DBFollowHandler
+import com.example.instagramclone.managers.handler.DBUserHandler
+import com.example.instagramclone.managers.handler.DBUsersHandler
 import com.example.instagramclone.model.User
+import com.example.instagramclone.utils.Extensions.toast
+import com.example.instagramclone.utils.Utils
+import java.lang.Exception
 
 /**
  * In Search Fragment, all registered users can be found by searching keyword and followed.
@@ -47,6 +56,61 @@ class SearchFragment : BaseFragment() {
         refreshAdapter(items)
     }
 
+    fun followOrUnfollow(to: User){
+        val uid = AuthManager.currentUser()!!.uid
+        if (!to.isFollowed){
+            followUser(uid, to)
+        }else{
+            unFollowUser(uid, to)
+        }
+    }
+
+    private fun followUser(uid: String, to: User){
+        DatabaseManager.loadUser(uid, object : DBUserHandler {
+            override fun onSuccess(me: User?) {
+                DatabaseManager.followUser(me!!, to, object : DBFollowHandler{
+                    override fun onSuccess(isDone: Boolean) {
+                        to.isFollowed = true
+                        DatabaseManager.storePostsToMyFeed(uid, to)
+
+                        val title = getString(R.string.str_following)
+                        val body = getString(R.string.str_followed_note).replace("$", me.fullname)
+                        Utils.sendNote(title, body, to.device_token)
+                    }
+
+                    override fun onError(e: Exception) {
+                    }
+
+                })
+            }
+
+            override fun onError(e: Exception) {
+            }
+
+        })
+    }
+
+    private fun unFollowUser(uid: String, to: User){
+        DatabaseManager.loadUser(uid, object : DBUserHandler{
+            override fun onSuccess(me: User?) {
+                DatabaseManager.unFollowUser(me!!, to, object : DBFollowHandler{
+                    override fun onSuccess(isDone: Boolean) {
+                        to.isFollowed = false
+                        DatabaseManager.removePostsFromMyFeed(uid, to)
+                    }
+
+                    override fun onError(e: Exception) {
+                    }
+
+                })
+            }
+
+            override fun onError(e: Exception) {
+            }
+
+        })
+    }
+
     private fun refreshAdapter(items: ArrayList<User>){
         val adapter = SearchAdapter(this, items)
         rv_search.adapter = adapter
@@ -66,23 +130,43 @@ class SearchFragment : BaseFragment() {
         refreshAdapter(users)
     }
 
-    private fun loadUsers(): ArrayList<User>{
-        items = ArrayList()
-        items.add(User("abbos", "abbosmardiev@gamil.com"))
-        items.add(User("elyor", "elyormamayev@gamil.com"))
-        items.add(User("shaxriyor", "shaxriyormirzamurodov@gamil.com"))
-        items.add(User("abdulla", "abdullaergashev@gamil.com"))
-        items.add(User("azamat", "azamatzarpullayev@gamil.com"))
-        items.add(User("jonibek", "jonibektinchlikov@gamil.com"))
-        items.add(User("ulug`bek", "ulugbekmaxanov@gamil.com"))
-        items.add(User("qilichbek", "qilichbekpardaboyev@gamil.com"))
-        items.add(User("azizjon", "azizjonsheronov@gamil.com"))
-        items.add(User("abbos", "abbosmardiev@gamil.com"))
-        items.add(User("elyor", "elyormamayev@gamil.com"))
-        items.add(User("shaxriyor", "shaxriyormirzamurodov@gamil.com"))
-        items.add(User("abdulla", "abdullaergashev@gamil.com"))
-        items.add(User("azamat", "azamatzarpullayev@gamil.com"))
-        items.add(User("jonibek", "jonibektinchlikov@gamil.com"))
+    private fun loadUsers(){
+        val uid = AuthManager.currentUser()!!.uid
+        DatabaseManager.loadUsers(object : DBUsersHandler{
+            override fun onSuccess(users: ArrayList<User>) {
+                DatabaseManager.loadFollowing(uid, object : DBUsersHandler{
+                    override fun onSuccess(followings: ArrayList<User>) {
+                        items.clear()
+                        items.addAll(mergedUsers(uid, users, followings))
+                        refreshAdapter(items)
+                    }
+
+                    override fun onError(e: Exception) {
+                    }
+
+                })
+            }
+
+            override fun onError(e: Exception) {
+            }
+
+        })
+    }
+
+    private fun mergedUsers(uid: String, users: ArrayList<User>, followings: ArrayList<User>): ArrayList<User>{
+        val items = ArrayList<User>()
+        for(u in users){
+            val user = u
+            for(f in followings){
+                if (u.uid == f.uid){
+                    user.isFollowed = true
+                    break
+                }
+            }
+            if (uid != user.uid){
+                items.add(user)
+            }
+        }
         return items
     }
 

@@ -16,6 +16,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="2dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/ic_person"
             app:shapeAppearanceOverlay="@style/circle"
             app:strokeColor="@color/app_color_2"
@@ -34,7 +35,7 @@
                 android:id="@+id/tv_fullname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ab.bos3232"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -43,7 +44,7 @@
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="February 2, 2022"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.instagramclone.R
 import com.example.instagramclone.fragments.FavoriteFragment
+import com.example.instagramclone.managers.AuthManager
 import com.example.instagramclone.model.Post
 import com.google.android.material.imageview.ShapeableImageView
 
@@ -51,7 +52,33 @@ class FavoriteAdapter(var fragment: FavoriteFragment, var items: ArrayList<Post>
         }
 
         fun bind(post: Post){
-            Glide.with(fragment).load(post.image).into(iv_post)
+            Glide.with(fragment).load(post.userImg).placeholder(R.drawable.ic_person).error(R.drawable.ic_person).into(iv_profile)
+            Glide.with(fragment).load(post.postImg).into(iv_post)
+            tv_fullname.text = post.fullname
+            tv_time.text = post.currentDate
+            tv_caption.text = post.caption
+
+            iv_like.setOnClickListener {
+                if (post.isLiked){
+                    post.isLiked = false
+                    iv_like.setImageResource(R.mipmap.outline_favorite_border_black_24)
+                }else{
+                    post.isLiked = true
+                    iv_like.setImageResource(R.drawable.icon_red_favorite)
+                }
+                fragment.likeOrUnlikePost(post)
+            }
+
+            val uid = AuthManager.currentUser()!!.uid
+            if (uid == post.uid){
+                iv_more.visibility = View.VISIBLE
+            }else{
+                iv_more.visibility = View.GONE
+            }
+            iv_more.setOnClickListener {
+                fragment.showDeleteDialog(post)
+            }
+
         }
 
     }

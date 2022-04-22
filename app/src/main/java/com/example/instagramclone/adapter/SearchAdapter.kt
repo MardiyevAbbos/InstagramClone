@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.instagramclone.R
 import com.example.instagramclone.fragments.SearchFragment
 import com.example.instagramclone.model.User
@@ -43,6 +44,26 @@ class SearchAdapter(var fragment: SearchFragment, var items: ArrayList<User>) : 
         fun bind(user: User){
             tv_fullname.text = user.fullname
             tv_email.text = user.email
+
+            Glide.with(fragment).load(user.userImg)
+                .placeholder(R.drawable.ic_person)
+                .error(R.drawable.ic_person)
+                .into(iv_profile)
+
+            tv_follow.setOnClickListener {
+                if (!user.isFollowed){
+                    tv_follow.text = fragment.getString(R.string.str_following)
+                }else{
+                    tv_follow.text = fragment.getString(R.string.str_follow)
+                }
+                fragment.followOrUnfollow(user)
+            }
+
+            if (!user.isFollowed){
+                tv_follow.text = fragment.getString(R.string.str_follow)
+            }else{
+                tv_follow.text = fragment.getString(R.string.str_following)
+            }
         }
 
     }
