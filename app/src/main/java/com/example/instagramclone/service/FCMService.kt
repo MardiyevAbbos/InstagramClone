@@ -2,15 +2,20 @@ package com.example.instagramclone.service
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.example.instagramclone.R
+import com.example.instagramclone.activity.MainActivity
 import com.example.instagramclone.utils.Logger
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -30,16 +35,23 @@ class FCMService : FirebaseMessagingService() {
     }
 
     private fun sendRegistrationToServer(token: String){
-        // TODO: send token to your server
+
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
+
+        val requestCode = (0..10).random()
+        val pendingIntent = PendingIntent.getActivity(this, requestCode,
+            openSandNotePage(message), FLAG_IMMUTABLE
+        )
+
         val title = message.data["title"]
         val body = message.data["body"]
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(body)
+            .setContentIntent(pendingIntent)
             .setSmallIcon(R.drawable.ic_notification)
             .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -87,6 +99,16 @@ class FCMService : FirebaseMessagingService() {
             e.printStackTrace()
             null
         }
+    }
+
+    private fun openSandNotePage(message: RemoteMessage): Intent{
+        val type = message.data["type"]
+
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        intent.putExtra("type", type)
+
+        return intent
     }
 
 }

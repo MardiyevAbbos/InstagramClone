@@ -1,10 +1,12 @@
 package com.example.instagramclone.activity
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 import com.example.instagramclone.R
@@ -31,7 +33,20 @@ class MainActivity : BaseActivity(), HomeFragment.HomeListener ,UploadFragment.U
         setLightStatusBar()
 
         initViews()
+        navigate(intent)
 
+    }
+
+    private fun navigate(intent: Intent?){
+        when(intent!!.getStringExtra("type")){
+            "home" -> viewPager.currentItem = 0
+            "search" -> viewPager.currentItem = 1
+        }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        navigate(intent)
     }
 
     private fun initViews() {
@@ -109,7 +124,3 @@ class MainActivity : BaseActivity(), HomeFragment.HomeListener ,UploadFragment.U
     }
 
 }
-
-// portreat: https://images.unsplash.com/photo-1649452814966-87450893154a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxN3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60
-// landscape: https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2OXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60
-// square: https://images.unsplash.com/photo-1606054534744-a3b13e35c574?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dHJpcHxlbnwwfDJ8MHx8&auto=format&fit=crop&w=500&q=60

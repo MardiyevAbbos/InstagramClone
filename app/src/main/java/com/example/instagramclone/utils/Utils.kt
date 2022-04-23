@@ -71,8 +71,7 @@ object Utils {
         return device_id
     }
 
-    fun sendNote(title: String, body: String, device_token: String){
-        val data = Data(title, body)
+    fun sendNote(data: Data, device_token: String){
         val deviceList = ArrayList<String>()
         deviceList.add(device_token)
         val fcmNote = FCMNote(data, deviceList)

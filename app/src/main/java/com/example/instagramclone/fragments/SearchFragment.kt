@@ -17,6 +17,7 @@ import com.example.instagramclone.managers.DatabaseManager
 import com.example.instagramclone.managers.handler.DBFollowHandler
 import com.example.instagramclone.managers.handler.DBUserHandler
 import com.example.instagramclone.managers.handler.DBUsersHandler
+import com.example.instagramclone.model.Data
 import com.example.instagramclone.model.User
 import com.example.instagramclone.utils.Extensions.toast
 import com.example.instagramclone.utils.Utils
@@ -75,7 +76,8 @@ class SearchFragment : BaseFragment() {
 
                         val title = getString(R.string.str_following)
                         val body = getString(R.string.str_followed_note).replace("$", me.fullname)
-                        Utils.sendNote(title, body, to.device_token)
+                        val data = Data(title, body, me.userImg, "search")
+                        Utils.sendNote(data, to.device_token)
                     }
 
                     override fun onError(e: Exception) {

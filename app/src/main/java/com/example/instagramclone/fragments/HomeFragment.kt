@@ -17,6 +17,7 @@ import com.example.instagramclone.managers.DatabaseManager
 import com.example.instagramclone.managers.handler.DBPostHandler
 import com.example.instagramclone.managers.handler.DBPostsHandler
 import com.example.instagramclone.managers.handler.DBUserHandler
+import com.example.instagramclone.model.Data
 import com.example.instagramclone.model.Post
 import com.example.instagramclone.model.User
 import com.example.instagramclone.utils.DialogListener
@@ -108,7 +109,8 @@ class HomeFragment : BaseFragment() {
                 if (user!!.device_token != post.device_token){
                     val title = getString(R.string.str_favorite)
                     val body = getString(R.string.str_liked_node).replace("$", user!!.fullname)
-                    Utils.sendNote(title, body, post.device_token)
+                    val data = Data(title, body, post.postImg, "home")
+                    Utils.sendNote(data, post.device_token)
                 }
             }
 

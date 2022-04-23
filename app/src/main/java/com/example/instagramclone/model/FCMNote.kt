@@ -7,5 +7,7 @@ data class FCMNote(
 
 data class Data(
     val title: String,
-    val body: String
+    val body: String,
+    val image: String,
+    val type: String
 )

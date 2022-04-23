@@ -44,6 +44,7 @@ class UploadFragment : BaseFragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_upload, container, false)
         initViews(view)
+        resetAll()
         return view
     }
 
