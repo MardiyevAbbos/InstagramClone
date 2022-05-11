@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/drawable-anydpi/ic_notification.xml" value="0.21666666666666667" />
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/drawable-anydpi/icon_red_favorite.xml" value="0.2203125" />
+        <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/drawable-anydpi/shape_circle_border_instagram.xml" value="0.2169230769230769" />
+        <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/drawable-anydpi/shape_circle_border_white.xml" value="0.2169230769230769" />
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/drawable-xxhdpi/shape_circle_orange_light.xml" value="0.2203125" />
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/drawable/app_main_gradient.xml" value="0.2101851851851852" />
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/drawable/bottom_navigation_color_selector.xml" value="0.2203125" />
@@ -19,13 +21,15 @@
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/custom_progress_dialog.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/fragment_favorite.xml" value="0.20416666666666666" />
-        <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/fragment_search.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/fragment_upload.xml" value="0.20416666666666666" />
-        <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/item_post_favorite.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/item_feed_stories.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/item_post_favorite.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/item_post_home.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/item_post_profile.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/item_story_view.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/item_user_search.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/itom_post_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidProjects/PDPAndroidProjects/Android Advanced(6-modul)/Lesson10/InstagramClone(Kotlin)/app/src/main/res/layout/view_dialog_double.xml" value="0.20416666666666666" />
@@ -41,12 +45,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.5" />
-      </ProjectState>
-    </option>
   </component>
 </project>

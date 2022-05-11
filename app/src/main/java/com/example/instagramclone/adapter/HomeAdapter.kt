@@ -6,29 +6,80 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.instagramclone.R
+import com.example.instagramclone.activity.MainActivity
 import com.example.instagramclone.fragments.HomeFragment
 import com.example.instagramclone.managers.AuthManager
+import com.example.instagramclone.managers.DatabaseManager
+import com.example.instagramclone.managers.handler.DBUsersHandler
 import com.example.instagramclone.model.Post
+import com.example.instagramclone.model.User
 import com.google.android.material.imageview.ShapeableImageView
+import java.lang.Exception
 
 class HomeAdapter(var fragment: HomeFragment, var items: ArrayList<Post>) : BaseAdapter() {
 
+    companion object{
+        private val TYPE_ITEM_STORY = 0
+        private val TYPE_ITEM_POST = 1
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        if (position == 0) {
+            return TYPE_ITEM_STORY
+        }
+        return TYPE_ITEM_POST
+    }
+
     override fun getItemCount(): Int {
-        return items.size
+        return items.size + 1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        if (viewType == TYPE_ITEM_STORY) {
+            val view =
+                LayoutInflater.from(parent.context).inflate(R.layout.item_feed_stories, parent, false)
+            return FeedStoryViewHolder(view)
+        }
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_post_home, parent, false)
         return PostViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is PostViewHolder){
-            holder.bind(items[position])
+        if(holder is FeedStoryViewHolder){
+            holder.bind()
         }
+        if (holder is PostViewHolder){
+            val id = position - 1
+            holder.bind(items[id])
+        }
+    }
+
+
+    inner class FeedStoryViewHolder(val view: View): RecyclerView.ViewHolder(view){
+        private var rv_stories: RecyclerView
+        init {
+            rv_stories = view.findViewById(R.id.rv_stories)
+        }
+
+        fun bind(){
+            fragment.showLoading(fragment.requireActivity())
+            rv_stories.layoutManager = LinearLayoutManager(fragment.requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            DatabaseManager.loadUsers(object : DBUsersHandler{
+                override fun onSuccess(users: ArrayList<User>) {
+                    fragment.dismissLoading()
+                    rv_stories.adapter = StoryAdapter(fragment, users)
+                }
+
+                override fun onError(e: Exception) = fragment.dismissLoading()
+
+            })
+        }
+
     }
 
     inner class PostViewHolder(val view: View) : RecyclerView.ViewHolder(view){

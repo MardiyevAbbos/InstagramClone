@@ -25,8 +25,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/str_favorite"
+                android:fontFamily="@font/custom_font"
+                android:gravity="center_vertical"
                 android:textColor="@color/black"
-                android:textSize="17sp"/>
+                android:textSize="26sp"/>
 
         </LinearLayout>
 

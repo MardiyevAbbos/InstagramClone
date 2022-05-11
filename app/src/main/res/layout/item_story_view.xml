@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="2dp"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/ll_background"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginHorizontal="4dp"
+        android:background="@drawable/shape_circle_border_instagram"
+        android:padding="2dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_circle_border_white"
+            android:padding="3dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:scaleType="centerCrop"
+                android:padding="0.5dp"
+                app:strokeWidth="0.5dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                app:strokeColor="#cbcbcb"
+                android:src="@drawable/bg_image"
+                app:shapeAppearanceOverlay="@style/circle" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_add"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:shapeAppearanceOverlay="@style/circle"
+                android:layout_gravity="bottom|right"
+                android:src="@drawable/ic_add_blue"
+                android:background="@color/white"/>
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_fullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="2dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:singleLine="true"
+        android:text="ab.bos3232"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+</LinearLayout>
