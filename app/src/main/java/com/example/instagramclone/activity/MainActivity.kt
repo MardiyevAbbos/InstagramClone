@@ -35,6 +35,8 @@ class MainActivity : BaseActivity(), HomeFragment.HomeListener ,UploadFragment.U
         initViews()
         navigate(intent)
 
+       // throw RuntimeException("Test Crash")
+
     }
 
     private fun navigate(intent: Intent?){
