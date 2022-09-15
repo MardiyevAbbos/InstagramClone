@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>welcome_text</key>
+        <value>Welcome to Instagram</value>
+    </entry>
+    <entry>
+        <key>welcome_font_size</key>
+        <value>30</value>
+    </entry>
+    <entry>
+        <key>main_background_color1</key>
+        <value>#FF9800</value>
+    </entry>
+    <entry>
+        <key>main_background_color2</key>
+        <value>#FF5722</value>
+    </entry>
+</defaultsMap>

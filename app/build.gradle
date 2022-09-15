@@ -67,4 +67,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-analytics'
 
+    // For Dynamic Link
+    implementation 'com.google.firebase:firebase-dynamic-links-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    // for Firebase Remote Config
+    implementation 'com.google.firebase:firebase-config-ktx'
+
 }
